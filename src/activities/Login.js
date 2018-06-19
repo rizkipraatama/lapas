@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Text, Alert } from "react-native";
+import { Text } from "react-native";
 import { Card, CardSection, Input, Button, Spinner } from '../components';
 
 import { connect } from 'react-redux';

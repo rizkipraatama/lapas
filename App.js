@@ -1,11 +1,12 @@
 import React from 'react';
-import { View } from 'react-native';
-import Login  from "./src/activities/Login";
+import { Login, Utama } from "./src/activities";
+import { createStackNavigator  } from 'react-navigation';
 
 import { Provider } from 'react-redux';
 import { compose, createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import reducers from './src/reducers';
+import Navigation from './src/services/Navigation';
 
 export default class App extends React.Component {
   render() {
@@ -14,8 +15,13 @@ export default class App extends React.Component {
 
     return (
       <Provider store={store}>
-        <Login />
+        <StackNav 
+          ref={navigatorRef => {Navigation.setTopLevelNavigator(navigatorRef)}}/>
       </Provider>
     );
   }
 }
+
+const StackNav = createStackNavigator({
+  Login, Utama
+});

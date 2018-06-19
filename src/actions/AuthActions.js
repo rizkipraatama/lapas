@@ -5,7 +5,7 @@ import {
   LOGIN_USER_FAIL,
   LOGIN_USER
 } from './types';
-import { Alert } from 'react-native';
+import Navigation from '../services/Navigation';
 
 export const emailChanged = (text) => {
   return {
@@ -52,5 +52,5 @@ const loginUserSuccess = (dispatch, token) => {
     type: LOGIN_USER_SUCCESS,
     payload: token
   });
-  Alert.alert('Authenticated', `Token: ${token}`, [{text: 'OK', onPress: () => {}}])
-};
+  Navigation.navigate('Utama');
+}; 
