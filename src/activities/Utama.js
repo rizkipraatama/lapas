@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { Text } from 'react-native';
-import { Card, CardSection, Input } from '../components';
 import { createBottomTabNavigator } from "react-navigation";
 
 import { connect } from 'react-redux';
@@ -9,14 +8,7 @@ class PersonalizedPost extends Component {
 
 	render() {
 		return (
-			<Card>
-				<CardSection>
-					<Input 
-						label="Token"
-						value={this.props.token}
-					/>
-				</CardSection>
-			</Card>
+			<Text>{this.props.token}</Text>
 		);
 	}
 }
@@ -24,11 +16,7 @@ class PersonalizedPost extends Component {
 class UnAnsweredPost extends Component {
 	render() {
 		return (
-			<Card>
-				<CardSection>
-					<Text> Belum Dijawab </Text>
-				</CardSection>
-			</Card>
+			<Text> Belum Dijawab </Text>
 		);
 	}
 }
@@ -36,18 +24,13 @@ class UnAnsweredPost extends Component {
 class NewestPost extends Component {
 	render() {
 		return (
-			<Card>
-				<CardSection>
-					<Text> Terbaru </Text>
-				</CardSection>
-			</Card>
+			<Text> Terbaru </Text>
 		);
 	}
 }
 
 const mapStateToProps = ({ auth }) => {
 	const { token } = auth;
-
 	return { token };
 }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Login, Utama } from "./src/activities";
+import { Login, Utama, Register } from "./src/activities";
 import { createStackNavigator  } from 'react-navigation';
 
 import { Provider } from 'react-redux';
@@ -23,5 +23,8 @@ export default class App extends React.Component {
 }
 
 const StackNav = createStackNavigator({
-  Login, Utama
+  Login, Register, Utama,
+}, {
+  initialRouteName: 'Login',
+  headerMode: 'none',
 });

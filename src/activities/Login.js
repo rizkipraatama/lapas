@@ -1,86 +1,76 @@
 import React, {Component} from 'react';
-import { Text } from "react-native";
-import { Card, CardSection, Input, Button, Spinner } from '../components';
-
+import { KeyboardAvoidingView, StatusBar, Text } from 'react-native';
+import { Button, Input, Logo } from "../components";
 import { connect } from 'react-redux';
-import { emailChanged, passwordChanged, loginUser } from '../actions';
+import { loginUser } from '../actions';
+import { isUsernameValid, isPasswordValid } from '../validator';
+import Navigator from '../services/Navigation'
+import { reduxForm, Field } from 'redux-form';
+
+import * as Theme from "../constant/Theme";
 
 class Login extends Component {
 
-	onEmailChange(text){
-		this.props.emailChanged(text);
-	}
-
-	onPasswordChange(text){
-		this.props.passwordChanged(text);
-	}
-
-	onButtonPress(){
-		const { email, password } = this.props;
-		
-		this.props.loginUser({email, password});
-	}
-
-	renderButton(){
-		if(this.props.loading) {
-			return <Spinner size='large' />;
-		} else {
-			return (
-				<Button onPress={this.onButtonPress.bind(this)}>
-					Login
-				</Button>
-			);
-		}
-	}
-
 	render() {
+		const { valid, pristine } = this.props;
 		return (
-			<Card>
-				<CardSection>
-					<Input 
-						label="Email"
-						placeholder="email@gmail.com"
-						onChangeText={this.onEmailChange.bind(this)}
-						value={this.props.email}
-					/>
-				</CardSection>
-
-				<CardSection>
-					<Input 
-						secureTextEntry
-						label="Password"
-						placeholder="password"
-						onChangeText={this.onPasswordChange.bind(this)}
-						value={this.props.password}
-					/>
-				</CardSection>
-
-				<Text style={styles.errorTextStyle}>
-					{this.props.error}
-				</Text>
-
-				<CardSection>
-					{this.renderButton()}
-				</CardSection>
-			</Card>
+			<KeyboardAvoidingView style={styles.container}>
+				<StatusBar 
+					backgroundColor={Theme.TRANSLUCENCY}
+					translucent={true}/>
+				<Logo 
+					source={require('../../assets/image/Logo_Lapas.png')} 
+					title="Info Lapas"/>
+				<Field 
+					name='username'
+					component={Input}
+					icon="account"
+					placeholder="Username"
+					returnKeyType="next"
+					onSubmitEditing={()=>this.inputpassword.focus()}
+				/>
+				<Field
+					name='password'
+					component={Input}
+					icon="lock"
+					placeholder="Kata Sandi"
+					secureTextEntry
+					returnKeyType="go"
+					getRef={(input)=>this.inputpassword = input}
+				/>
+				{/* FIXME: props.loading is broken, plan is to get the loading states from redux-form */}
+				<Button 
+					onPress={this.props.handleSubmit(loginUser)}
+					isLoading={this.props.loading}
+					isValid={valid && !pristine}>
+					<Text>Masuk</Text>
+				</Button>
+				<Text style={styles.registerText} onPress={()=>Navigator.navigate('Register')}> Belum punya akun? Registrasi sekarang!</Text>
+			</KeyboardAvoidingView>
 		);
 	}
 }
 
 const styles = {
-	errorTextStyle: {
-		fontSize: 20,
-		alignSelf: 'center',
-		color: 'red'
+	container: {
+		flex: 1,
+		backgroundColor: Theme.COLORED_BACKGROUND,
+		padding: 16
+	},
+	registerText: {
+		textAlign: 'center',
+		fontWeight: '700'
 	}
 }
 
-const mapStateToProps = ({ auth }) => {
-	const { email, password, error, loading, token } = auth;
-
-	return { email, password, error, loading, token };
-}
-
-export default connect(mapStateToProps, {
-	emailChanged, passwordChanged, loginUser
+LoginForm =  reduxForm({
+	form: 'Login',
+	validate: (values) => {
+		const errors = {};
+		errors.username = isUsernameValid(values.username);
+		errors.password = isPasswordValid(values.password);
+		return errors;
+	}
 })(Login);
+
+export default connect(null, null)(LoginForm);
