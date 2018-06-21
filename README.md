@@ -2,13 +2,19 @@ This project was bootstrapped with [Create React Native App](https://github.com/
 
 ## Get Started
 
-1. Run following command to generate the platform subfolders
+1. Run the following command to Install yarn & get node_modules
+```
+npm i --global yarn
+yarn
+```
+
+2. Run following command to generate the platform subfolders
 ```
 react-native upgrade
 ```
  - Select n / no if prompted to preserved project config
 
-2. Copy this to android/app/build.gradle (not android/build.gradle) so we can use react-native-vector-icon
+3. Copy this to android/app/build.gradle (not android/build.gradle) so we can use react-native-vector-icon
 ```
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
@@ -20,9 +26,7 @@ project.ext.react = [
 ]
 ``` 
 
-3. Install yarn, get node_modules & run react-native on android
+4. run react-native on android
 ```
-npm i --global yarn
-yarn
 yarn android
 ```
