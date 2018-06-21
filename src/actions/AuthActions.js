@@ -41,7 +41,7 @@ const loginUserFail = (dispatch, message) => {
 const loginUserSuccess = (dispatch, token) => {
   dispatch({ type: SAVE_USER, payload: token });
   dispatch(reset('Login'));
-  Navigation.navigate('Utama');
+  Navigation.navigate('Home');
 }; 
 
 export const createUser = ({fullname, username, email, password, address, nik, nohp}, dispatch, props) => {

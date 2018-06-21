@@ -1,5 +1,5 @@
 import Login from './Login';
-import Utama from './Utama';
+import ListKunjungan from './ListKunjungan';
 import Register from './Register';
 
-export { Login, Register, Utama }
+export { Login, Register, ListKunjungan }

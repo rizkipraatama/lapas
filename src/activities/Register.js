@@ -85,7 +85,6 @@ class Register extends Component {
 						returnKeyType="go"
 						getRef={(ref)=>this.numberInput = ref}
 					/>
-					{/* FIXME: props.loading is broken, plan is to get the loading states from redux-form */}
 					<Button 
 						onPress={this.props.handleSubmit(createUser)}
 						isLoading={this.props.loading}
@@ -122,4 +121,9 @@ RegisterForm =  reduxForm({
 	}
 })(Register);
 
-export default connect(null, null)(RegisterForm);
+mapStateToProps = ({form}) => {
+	const { loading } = form.Login;
+	return { loading };
+}
+
+export default connect(mapStateToProps, null)(RegisterForm);

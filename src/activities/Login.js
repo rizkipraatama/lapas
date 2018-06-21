@@ -38,7 +38,6 @@ class Login extends Component {
 					returnKeyType="go"
 					getRef={(input)=>this.inputpassword = input}
 				/>
-				{/* FIXME: props.loading is broken, plan is to get the loading states from redux-form */}
 				<Button 
 					onPress={this.props.handleSubmit(loginUser)}
 					isLoading={this.props.loading}
@@ -73,4 +72,9 @@ LoginForm =  reduxForm({
 	}
 })(Login);
 
-export default connect(null, null)(LoginForm);
+mapStateToProps = ({form}) => {
+	const { loading } = form.Login;
+	return { loading };
+}
+
+export default connect(mapStateToProps, null)(LoginForm);
