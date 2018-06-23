@@ -1,4 +1,4 @@
-import { Login, Register, ListKunjungan, PrisonerDetail, Profile, Settings } from "./activities";
+import { Login, Register, ListKunjungan, PrisonerDetail, Profile, Settings, FormVisit } from "./activities";
 import { createStackNavigator, createDrawerNavigator  } from 'react-navigation';
 import * as Theme from './constant/Theme'
 import { HomeDrawer } from "./components";
@@ -23,7 +23,7 @@ Home = createDrawerNavigator({
 // };
 
 rootNav = createStackNavigator({
-  Login, Register, Home, PrisonerDetail, Settings
+  Login, Register, Home, PrisonerDetail, Settings, FormVisit
 }, {
   initialRouteName: 'Login',
   headerMode: 'none',
