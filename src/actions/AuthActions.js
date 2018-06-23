@@ -9,6 +9,8 @@ import { Alert } from "react-native";
 import Navigation from '../services/Navigation';
 import { change, reset, SubmissionError } from "redux-form";
 
+import { me as UserMockData } from '../datamock'
+
 // TODO: Ganti payload 'email' jadi username.
 export const loginUser = ({username, password}, dispatch, props) => {
   dispatch({type: LOGIN_USER});
@@ -25,7 +27,8 @@ export const loginUser = ({username, password}, dispatch, props) => {
   .then((r) => {
       dispatch({type: LOGIN_FORM_IDLE });
       if (r.token) {
-        loginUserSuccess(dispatch, r.token);
+        // TODO: Change user mock to real data
+        loginUserSuccess(dispatch, r.token, UserMockData);
       } else {
         loginUserFail(dispatch, r.message);
       }
@@ -38,8 +41,8 @@ const loginUserFail = (dispatch, message) => {
   //throw new SubmissionError({_error: message});
 }
 
-const loginUserSuccess = (dispatch, token) => {
-  dispatch({ type: SAVE_USER, payload: token });
+const loginUserSuccess = (dispatch, token, user) => {
+  dispatch({ type: SAVE_USER, payload: { token, user } });
   dispatch(reset('Login'));
   Navigation.navigate('Home');
 }; 

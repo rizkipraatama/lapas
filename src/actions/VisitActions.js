@@ -6,6 +6,8 @@ import { Alert } from "react-native";
 import Navigation from '../services/Navigation';
 import { change, reset, SubmissionError } from "redux-form";
 
+import { penghuni } from '../datamock'
+
 export const fetchVisit = ({token}) => {
   return (dispatch) => {
     dispatch({ type: FETCH_VISIT });
@@ -19,7 +21,8 @@ export const fetchVisit = ({token}) => {
     .then((response) => response.json())
     .then((res) => {
         if (res) {
-          fetchVisitSuccess(dispatch, res.categories);
+          // TODO: Change mock to real data
+          fetchVisitSuccess(dispatch, penghuni);
         }
     });
   }
