@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import { Text, StatusBar, View, TouchableOpacity } from 'react-native';
+import { StatusBar, View, ScrollView } from 'react-native';
 import { Header } from "../components/";
+import { List, ListItem } from 'react-native-elements';
 import * as Theme from '../constant/Theme';
 
 import { connect } from 'react-redux';
@@ -17,8 +18,23 @@ class ListKunjungan extends Component {
 
 	renderVisit(){
 		if (!this.props.visits) return null;
-		console.log(this.props.visits);
-		return null;
+
+		visitsListItem = this.props.visits.map((user) => (
+			<ListItem
+				key={user.login.username}
+				roundAvatar
+				avatar={{ uri: user.picture.thumbnail }}
+				title={`${user.name.first.toUpperCase()} ${user.name.last.toUpperCase()}`}
+				subtitle={user.email}
+				onPress={() => { this.props.navigation.navigate('PrisonerDetail', { ...user }) }}
+			/>
+		));
+
+		return (
+			<List>
+				{visitsListItem}
+			</List>
+		)
 	}
 
 	static navigationOptions = (props) => {
@@ -28,14 +44,14 @@ class ListKunjungan extends Component {
 
 	render() {
 		return (
-			<View>
+			<View style={{flex: 1}}>
 				<Header 
-					left={{icon: 'menu', onPress: () => Navigator.openDrawer()}} 
+					left={{icon: 'menu', onPress: () => this.props.navigation.openDrawer()}} 
 					title="Kunjungan Lapas"
-					right={{icon: 'plus', onPress: () => Navigator.navigate('Login')}}/>
-				<Text>{this.props.token}</Text>
-				{/* TODO: Change this to React Native ListView*/}
-				{this.renderVisit()}
+					right={{icon: 'plus', onPress: () => this.props.navigation.navigate('Login')}}/>
+				<ScrollView>
+						{this.renderVisit()}
+				</ScrollView>
 			</View>
 		);
 	}

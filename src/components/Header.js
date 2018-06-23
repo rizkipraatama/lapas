@@ -10,13 +10,17 @@ const Header = ({ left, title, right }) => {
   const {leftStyle, containerStyle, titleStyle, rightStyle} = styles;
   return (
     <View style={containerStyle}>
-      <TouchableOpacity onPress={left.onPress} style={leftStyle}>
-        <Icon name={left.icon} size={28} color="#fff"/>
-      </TouchableOpacity>
+      {left?
+        <TouchableOpacity onPress={left.onPress} style={leftStyle}>
+          <Icon name={left.icon} size={28} color="#fff"/>
+        </TouchableOpacity>
+      : null}
       <Text style={titleStyle}>{title}</Text>
-      <TouchableOpacity onPress={right.onPress} style={rightStyle}>
+      {right?
+        <TouchableOpacity onPress={right.onPress} style={rightStyle}>
         <Icon name={right.icon} size={28} color="#fff"/>
       </TouchableOpacity>
+      : null}
     </View>
   );
 }
@@ -26,7 +30,10 @@ Header.propTypes = {
     icon: PropTypes.string,
     onPress: PropTypes.func,
   }),
-  title: PropTypes.string,
+  title: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]),
   right: PropTypes.shape({
     icon: PropTypes.string,
     onPress: PropTypes.func,

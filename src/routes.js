@@ -1,4 +1,4 @@
-import { Login, Register, ListKunjungan } from "./activities";
+import { Login, Register, ListKunjungan, PrisonerDetail, Profile, Settings } from "./activities";
 import { createStackNavigator, createDrawerNavigator  } from 'react-navigation';
 import * as Theme from './constant/Theme'
 import { HomeDrawer } from "./components";
@@ -7,6 +7,9 @@ Home = createDrawerNavigator({
   'List Kunjungan': {
     screen: ListKunjungan,
   },
+  'Profile' : {
+    screen:  Profile,
+  }
 }, {
   contentComponent: HomeDrawer,
   drawerWidth: 300,
@@ -20,14 +23,14 @@ Home = createDrawerNavigator({
 // };
 
 rootNav = createStackNavigator({
-  Login, Register, Home,
+  Login, Register, Home, PrisonerDetail, Settings
 }, {
   initialRouteName: 'Login',
-  headerMode: 'screen',
+  headerMode: 'none',
 });
 
-[Login, Register, Home].map(v => v.navigationOptions = {
-  header: null
-});
+// [Login, Register, Home, PrisonerDetail].map(v => v.navigationOptions = {
+//   header: null
+// });
 
 export default rootNav;
