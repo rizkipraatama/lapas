@@ -17,6 +17,8 @@ export const gettingAuth = () => {
       if (auth) {
         const { token, user } = JSON.parse(auth);
         setUserNavigateHome(dispatch, token, user);
+      } else {
+        Navigation.replaceWith('Login');
       }
     } catch (error) {
       console.log(error);
@@ -66,7 +68,7 @@ const loginUserSuccess = async (dispatch, token, user) => {
 const setUserNavigateHome = (dispatch, token, user) => {
   dispatch({ type: SAVE_USER, payload: { token, user } });
   dispatch(reset('Login'));
-  Navigation.navigate('Home');
+  Navigation.replaceWith('Home');
 }
 
 export const createUser = ({fullname, username, email, password, address, nik, nohp}, dispatch, props) => {
@@ -107,7 +109,7 @@ const createUserSuccess = (dispatch) => {
     'Pendaftaran Berhasil', 
     'Silahkan login!',
     [
-      { text: 'OK', onPress: () => { Navigation.navigate('Login'); } },
+      { text: 'OK', onPress: () => { Navigation.replaceWith('Login'); } },
     ],
     { cancelable: false }
   );
@@ -126,6 +128,6 @@ export const logout = () => {
 
 const deleteUserNavigateLogin = (dispatch) => {
   dispatch({ type: DELETE_USER });
-  Navigation.navigate('Login');
+  Navigation.replaceWith('Login');
 }
 

@@ -4,18 +4,12 @@ import { Button, Input, Logo } from "../components";
 import { connect } from 'react-redux';
 import { loginUser } from '../actions';
 import { isUsernameValid, isPasswordValid } from '../validator';
-import Navigator from '../services/Navigation'
 import { reduxForm, Field } from 'redux-form';
 import { gettingAuth } from '../actions';
 
 import * as Theme from "../constant/Theme";
 
 class Login extends Component {
-	constructor(props) {
-		super(props);
-		this.props.gettingAuth();
-	}
-	
 	render() {
 		const { valid, pristine } = this.props;
 		return (
@@ -49,7 +43,7 @@ class Login extends Component {
 					isValid={valid && !pristine}>
 					<Text>Masuk</Text>
 				</Button>
-				<Text style={styles.registerText} onPress={()=>Navigator.navigate('Register')}> Belum punya akun? Registrasi sekarang!</Text>
+				<Text style={styles.registerText} onPress={()=>this.props.navigation.navigate('Register')}> Belum punya akun? Registrasi sekarang!</Text>
 			</KeyboardAvoidingView>
 		);
 	}

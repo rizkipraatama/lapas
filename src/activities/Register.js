@@ -4,7 +4,6 @@ import { Button, Input, TranslucentHeader } from "../components";
 import { connect } from 'react-redux';
 import { createUser } from '../actions';
 import { isUsernameValid, isPasswordValid, isEmailValid, isNotEmpty } from '../validator';
-import Navigator from '../services/Navigation'
 import { reduxForm, Field } from 'redux-form';
 
 import * as Theme from "../constant/Theme";
@@ -13,7 +12,6 @@ class Register extends Component {
 
 	render() {
 		const { valid, pristine } = this.props;
-		console.log(this.props);
 		return (
 			<ScrollView style={styles.container} keyboardShouldPersistTaps={'handled'} >
 				<KeyboardAvoidingView behavior='padding'>
@@ -22,7 +20,7 @@ class Register extends Component {
 						translucent={true}/>
 					<TranslucentHeader 
 						title="Pendaftaran"
-						onPress={()=>Navigator.navigate('Login')}/>
+						onPress={()=>this.props.navigation.goBack()}/>
 					<Field
 						name="fullname"
 						component={Input}

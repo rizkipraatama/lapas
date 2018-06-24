@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { ScrollView, View, Button, Text } from 'react-native';
 import { Header } from '../components'
 import { Tile, List, ListItem } from 'react-native-elements';
-import Navigator from '../services/Navigation';
 
 class PrisonerDetail extends Component {
   render() {
@@ -56,7 +55,7 @@ class PrisonerDetail extends Component {
           </List>
           <Button
           title="Ajukan Kunjungan"
-            onPress={()=>Navigator.navigate('FormVisit')}></Button>        
+            onPress={()=>this.props.navigation.navigate('FormVisit')}></Button>        
           </ScrollView>
       </View>
       

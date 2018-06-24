@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Navigator from '../services/Navigation'
 import { reduxForm, Field } from 'redux-form';
 import { Button, Input, TranslucentHeader } from "../components";
 import * as Theme from "../constant/Theme";
@@ -18,7 +17,7 @@ class FormVisit extends Component {
 						translucent={true}/>
 					<TranslucentHeader 
 						title="Pengajuan Kunjungan"
-						onPress={()=>Navigator.navigate('PrisonerDetail')}/>
+						onPress={()=>this.props.navigation.navigate('PrisonerDetail')}/>
 						<View style = {styles.container1}>
 							<Text>{this.props.fullname}</Text>
 	          				<Text>{this.props.email}</Text>

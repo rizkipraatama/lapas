@@ -1,4 +1,4 @@
-import { NavigationActions, DrawerActions } from 'react-navigation';
+import { StackActions, NavigationActions, DrawerActions } from 'react-navigation';
 
 let _navigator;
 
@@ -6,11 +6,11 @@ function setTopLevelNavigator(navigationRef) {
   _navigator = navigationRef;
 }
 
-function navigate(routeName, params) {
+function replaceWith(routeName, params) {
   _navigator.dispatch(
-    NavigationActions.navigate({
-      routeName,
-      params,
+    StackActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName, params })],
     })
   );
 }
@@ -22,7 +22,7 @@ function openDrawer() {
 }
 
 export default {
-  navigate,
+  replaceWith,
   openDrawer,
   setTopLevelNavigator,
 };
