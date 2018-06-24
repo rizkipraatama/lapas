@@ -18,7 +18,7 @@ class FormVisit extends Component {
 						translucent={true}/>
 					<TranslucentHeader 
 						title="Pengajuan Kunjungan"
-						onPress={()=>Navigator.navigate('Login')}/>
+						onPress={()=>Navigator.navigate('PrisonerDetail')}/>
 						<View style = {styles.container1}>
 							<Text>{this.props.fullname}</Text>
 	          				<Text>{this.props.email}</Text>
@@ -31,8 +31,7 @@ class FormVisit extends Component {
 						icon="account"
 						placeholder="Foto KTP"
 						returnKeyType="next"
-						onSubmitEditing={()=>this.passwordInput.focus()}
-						getRef={(ref)=>this.emailInput = ref}
+						onSubmitEditing={()=>this.suratizin.focus()}
 					/>
 					<Field
 						name='suratizin'
@@ -40,9 +39,8 @@ class FormVisit extends Component {
 						icon="account-card-details"
 						placeholder="Foto Surat Izin"
 						secureTextEntry
-						returnKeyType="next"
-						onSubmitEditing={()=>this.alamatInput.focus()}
-						getRef={(ref)=>this.passwordInput = ref}
+						returnKeyType="go"
+						getRef={(ref)=>this.suratizin = ref}
 					/>
 					<Button 
 						isLoading={this.props.loading}
