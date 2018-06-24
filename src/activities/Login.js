@@ -6,11 +6,16 @@ import { loginUser } from '../actions';
 import { isUsernameValid, isPasswordValid } from '../validator';
 import Navigator from '../services/Navigation'
 import { reduxForm, Field } from 'redux-form';
+import { gettingAuth } from '../actions';
 
 import * as Theme from "../constant/Theme";
 
 class Login extends Component {
-
+	constructor(props) {
+		super(props);
+		this.props.gettingAuth();
+	}
+	
 	render() {
 		const { valid, pristine } = this.props;
 		return (
@@ -77,4 +82,4 @@ mapStateToProps = ({form}) => {
 	return { loading };
 }
 
-export default connect(mapStateToProps, null)(LoginForm);
+export default connect(mapStateToProps, { gettingAuth })(LoginForm);

@@ -4,33 +4,46 @@ import {
   CREATE_USER,
   REGISTER_FORM_IDLE,
   SAVE_USER,
+  DELETE_USER,
 } from '../constant/Actions';
-import { Alert } from "react-native";
+import { Alert, AsyncStorage } from "react-native";
 import Navigation from '../services/Navigation';
 import { change, reset, SubmissionError } from "redux-form";
 
-import { me as UserMockData } from '../datamock'
+export const gettingAuth = () => {
+  return async (dispatch) => {
+    try {
+      const auth = await AsyncStorage.getItem('auth');
+      if (auth) {
+        const { token, user } = JSON.parse(auth);
+        setUserNavigateHome(dispatch, token, user);
+      }
+    } catch (error) {
+      console.log(error);
+      Alert.alert("Penyimpanan AsyncStorage gagal!", "Kesalahan aplikasi atau hak akses storage dinonaktifkan");
+    }
+  }
+}
 
-// TODO: Ganti payload 'email' jadi username.
 export const loginUser = ({username, password}, dispatch, props) => {
   dispatch({type: LOGIN_USER});
-  return fetch('http://35.198.204.194:8000/api/authenticate', {
+  return fetch('http://pratamaserv.com/userLogin.php', {
     method: 'POST',
     headers: {
         Accept: 'application/json',
         'Content-type': 'application/json',
     },
-    // TODO: for now the correct username: ab@a.com, password: admin
-    body: JSON.stringify({email: username, password}),
+    body: JSON.stringify({username, password}),
   })
   .then((response) => response.json())
   .then((r) => {
       dispatch({type: LOGIN_FORM_IDLE });
-      if (r.token) {
+      if (r.error == false) {
         // TODO: Change user mock to real data
-        loginUserSuccess(dispatch, r.token, UserMockData);
+        token = "2323";
+        loginUserSuccess(dispatch, token, r.user);
       } else {
-        loginUserFail(dispatch, r.message);
+        loginUserFail(dispatch, r.msg);
       }
   });
 }
@@ -41,11 +54,20 @@ const loginUserFail = (dispatch, message) => {
   //throw new SubmissionError({_error: message});
 }
 
-const loginUserSuccess = (dispatch, token, user) => {
+const loginUserSuccess = async (dispatch, token, user) => {
+  try { 
+    await AsyncStorage.setItem('auth', JSON.stringify({ token, user }));
+    setUserNavigateHome(dispatch, token, user);
+  } catch (error) {
+    Alert.alert("Penyimpanan AsyncStorage gagal!", "Kesalahan aplikasi atau hak akses storage dinonaktifkan");
+  }
+};
+
+const setUserNavigateHome = (dispatch, token, user) => {
   dispatch({ type: SAVE_USER, payload: { token, user } });
   dispatch(reset('Login'));
   Navigation.navigate('Home');
-}; 
+}
 
 export const createUser = ({fullname, username, email, password, address, nik, nohp}, dispatch, props) => {
   dispatch({type: CREATE_USER});
@@ -89,5 +111,21 @@ const createUserSuccess = (dispatch) => {
     ],
     { cancelable: false }
   );
+}
+
+export const logout = () => {
+  return async (dispatch) => {
+    try {
+      await AsyncStorage.removeItem('auth');
+      deleteUserNavigateLogin(dispatch);
+    } catch (error) {
+      Alert.alert("Penyimpanan AsyncStorage gagal!", "Kesalahan aplikasi atau hak akses storage dinonaktifkan");
+    }
+  };
+}
+
+const deleteUserNavigateLogin = (dispatch) => {
+  dispatch({ type: DELETE_USER });
+  Navigation.navigate('Login');
 }
 

@@ -47,8 +47,7 @@ class ListKunjungan extends Component {
 			<View style={{flex: 1}}>
 				<Header 
 					left={{icon: 'menu', onPress: () => this.props.navigation.openDrawer()}} 
-					title="Kunjungan Lapas"
-					right={{icon: 'plus', onPress: () => this.props.navigation.navigate('Login')}}/>
+					title="Kunjungan Lapas"/>
 				<ScrollView>
 						{this.renderVisit()}
 				</ScrollView>

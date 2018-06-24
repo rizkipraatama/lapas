@@ -1,18 +1,26 @@
 import {
-  SAVE_USER
+  SAVE_USER,
+  DELETE_USER,
 } from '../constant/Actions';
 
-import { me as UserMockData } from '../datamock'
-// TODO: change user mock to real data
 const INITIAL_STATE = {
   token: null,
-  user: UserMockData,
+  user: {
+    name: null,
+    username: null,
+    email: null,
+    nohp: null,
+    nik: null,
+    alamat: null,
+  }
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch(action.type) {
     case SAVE_USER:
       return { ...state, token: action.payload.token, user: action.payload.user };
+    case DELETE_USER:
+      return { ...state, ...INITIAL_STATE };
     default:
       return state;
   }

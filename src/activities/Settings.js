@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, View, Button } from 'react-native';
 import { Header } from '../components'
 import { List, ListItem } from 'react-native-elements';
 
+import { connect } from 'react-redux';
+import { logout } from '../actions';
+
 class Settings extends Component {
+
+  handleLogout() {
+    this.props.logout();
+  }
+
   render() {
     return (
       <View style={{flex: 1}}>
@@ -24,8 +32,9 @@ class Settings extends Component {
           </List>
           <List>
             <ListItem
-              title="Sign Out"
-              rightIcon={{ name: 'cancel' }}
+              title="Keluar"
+              rightIcon={{ name: 'cancel'}}
+              onPress={ this.handleLogout.bind(this) }
             />
           </List>
         </ScrollView>
@@ -35,4 +44,4 @@ class Settings extends Component {
   }
 }
 
-export default Settings;
+export default connect(null, { logout })(Settings);

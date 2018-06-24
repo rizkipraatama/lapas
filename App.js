@@ -6,6 +6,9 @@ import reducers from './src/reducers';
 import Navigator from './src/services/Navigation';
 import Routes from './src/routes';
 
+import { YellowBox } from 'react-native';
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
+
 export default class App extends React.Component {
   render() {
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

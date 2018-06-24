@@ -16,8 +16,8 @@ class Profile extends Component {
         <ScrollView>
           <Tile
             featured
-            title={`${this.props.name.first.toUpperCase()} ${this.props.name.last.toUpperCase()}`}
-            caption={this.props.email}
+            title={this.props.name}
+            caption={this.props.nik}
           />
 
           <Button
@@ -34,28 +34,28 @@ class Profile extends Component {
             />
             <ListItem
               title="Phone"
-              rightTitle={this.props.phone}
+              rightTitle={this.props.nohp}
               hideChevron
             />
           </List>
 
           <List>
             <ListItem
-              title="Username"
-              rightTitle={this.props.login.username}
+              title="Email"
+              rightTitle={this.props.email}
+              hideChevron
+            />
+            <ListItem
+              title="NIK"
+              rightTitle={this.props.nik}
               hideChevron
             />
           </List>
 
           <List>
             <ListItem
-              title="Birthday"
-              rightTitle={this.props.dob}
-              hideChevron
-            />
-            <ListItem
-              title="City"
-              rightTitle={this.props.location.city}
+              title="Lokasi"
+              rightTitle={this.props.alamat}
               hideChevron
             />
           </List>
@@ -66,8 +66,8 @@ class Profile extends Component {
 }
 
 const mapStateToProps = ({ auth }) => {
-	const { name, email, phone, login, dob, location } = auth.user;
-	return { name, email, phone, login, dob, location };
+	const { username, name, email, nik, nohp, alamat } = auth.user;
+	return { username, name, email, nik, nohp, alamat };
 }
 
 export default connect(mapStateToProps, {})(Profile);
