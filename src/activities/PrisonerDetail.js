@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, View, Button, Text } from 'react-native';
 import { Header } from '../components'
 import { Tile, List, ListItem } from 'react-native-elements';
+import Navigator from '../services/Navigation';
 
 class PrisonerDetail extends Component {
   render() {
@@ -53,7 +54,10 @@ class PrisonerDetail extends Component {
               hideChevron
             />
           </List>
-        </ScrollView>
+          <Button
+          title="Ajukan Kunjungan"
+            onPress={()=>Navigator.navigate('FormVisit')}></Button>        
+          </ScrollView>
       </View>
       
     );
