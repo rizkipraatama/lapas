@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, StatusBar } from 'react-native';
-import { Logo } from '../components';
+import SplashScreen from 'react-native-splash-screen'
 import * as Theme from '../constant/Theme';
 import { connect } from 'react-redux';
 import { gettingAuth } from '../actions';
@@ -12,8 +12,11 @@ class Splash extends Component {
   }
 
   componentDidMount(){
-		this.props.gettingAuth();
+    this.props.gettingAuth().then(()=> {
+      SplashScreen.hide();  
+    });
   }
+
   
   render(){
     return (
@@ -21,9 +24,6 @@ class Splash extends Component {
         <StatusBar 
 					backgroundColor={Theme.TRANSLUCENCY}
 					translucent={true}/>
-				<Logo 
-					source={require('../../assets/image/Logo_Lapas.png')} 
-					title="Info Lapas"/>
       </View>
     );
   }
