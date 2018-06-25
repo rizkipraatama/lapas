@@ -1,4 +1,4 @@
-import { VISITATION, VISITATION_SUCC } from "../constant/Actions";
+import { VISIT_PRISONER, VISIT_FORM_IDLE } from "../constant/Actions";
 
 const INITIAL_STATE = {
   loading: false,
@@ -6,9 +6,9 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch(action.type) {
-    case VISITATION:
+    case VISIT_PRISONER:
       return { ...state, loading: true, };
-    case VISITATION_SUCC:
+    case VISIT_FORM_IDLE:
       return { ...state, loading: false, };
     default:
       return state;

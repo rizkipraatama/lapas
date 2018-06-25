@@ -4,6 +4,7 @@ import LoginFormReducer from './LoginFormReducer';
 import RegisterFormReducer from './RegisterFormReducer';
 import VisitReducer from './VisitReducer';
 import { reducer as FormReducer } from 'redux-form';
+import VisitFormReducer from './VisitFormReducer';
 
 export default combineReducers({
   auth: AuthReducer,
@@ -11,5 +12,6 @@ export default combineReducers({
   form: FormReducer.plugin({
     Login: LoginFormReducer,
     Register: RegisterFormReducer,
+    Visit: VisitFormReducer,
   }),
 });

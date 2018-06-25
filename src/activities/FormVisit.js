@@ -4,7 +4,8 @@ import { Button, Input, TranslucentHeader } from "../components";
 import * as Theme from "../constant/Theme";
 import { ScrollView, KeyboardAvoidingView, StatusBar, Text, View } from 'react-native';
 import { connect } from 'react-redux';
-import {isNotEmpty } from '../validator';
+import { isNotEmpty } from '../validator';
+import { createVisit } from "../actions";
 
 class FormVisit extends Component {
   render() {
@@ -18,30 +19,31 @@ class FormVisit extends Component {
 					<TranslucentHeader 
 						title="Pengajuan Kunjungan"
 						onPress={()=>this.props.navigation.navigate('PrisonerDetail')}/>
-						<View style = {styles.container1}>
-							<Text>{this.props.name}</Text>
-	          				<Text>{this.props.email}</Text>
-	          				<Text>{this.props.nik}</Text>
-	          				<Text>{this.props.nohp}</Text>
-	          			</View>
+					<View>
+						<Text>{this.props.name}</Text>
+						<Text>{this.props.email}</Text>
+						<Text>{this.props.nik}</Text>
+						<Text>{this.props.nohp}</Text>
+					</View>
 					<Field
 						name='ktp'
 						component={Input}
-						icon="account"
+						icon="file-document"
 						placeholder="Foto KTP"
 						returnKeyType="next"
-						onSubmitEditing={()=>this.suratizin.focus()}
+						onSubmitEditing={()=>this.suratizinInput.focus()}
 					/>
 					<Field
 						name='suratizin'
 						component={Input}
-						icon="account-card-details"
+						icon="file-document"
 						placeholder="Foto Surat Izin"
 						secureTextEntry
 						returnKeyType="go"
-						getRef={(ref)=>this.suratizin = ref}
+						getRef={(ref)=>this.suratizinInput = ref}
 					/>
 					<Button 
+						onPress={this.props.handleSubmit(createVisit)}
 						isLoading={this.props.loading}
 						isValid={valid && !pristine}>
 						<Text>Ajukan Kunjungan</Text>
@@ -68,7 +70,7 @@ container1: {
 }
 
 VisittForm =  reduxForm({
-	form: 'FormVisit',
+	form: 'Visit',
 	validate: (values) => {
 		const errors = {};
 		errors.ktp = isNotEmpty(values.ktp);
@@ -77,12 +79,12 @@ VisittForm =  reduxForm({
 	}
 })(FormVisit);
 
-const mapStateToProps = ({auth}) => {
+const mapStateToProps = ({auth, form}) => {
+	const { loading } = form.Visit;
   const { name, email, nik, nohp } = auth.user;
-
-  return { name, email, nik, nohp };
+	const token = auth.token;
+  return { loading, name, email, nik, nohp, token };
 };
-
 
 export default connect(mapStateToProps, null)(VisittForm);
 

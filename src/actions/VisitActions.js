@@ -1,6 +1,8 @@
 import {
   FETCH_VISIT,
   FETCH_VISIT_SUCCESS,
+  VISIT_PRISONER,
+  VISIT_FORM_IDLE,
 } from '../constant/Actions';
 import { Alert } from "react-native";
 import Navigation from '../services/Navigation';
@@ -30,4 +32,20 @@ export const fetchVisit = ({token}) => {
 
 const fetchVisitSuccess = (dispatch, visits) => {
   dispatch({ type: FETCH_VISIT_SUCCESS, payload: visits });
+}
+
+export const createVisit = ({ktp, suratizin}, dispatch, props) => {
+  dispatch({type: VISIT_PRISONER});
+  // const data = new FormData();
+  // data.append('fotoktp', {
+  //   uri: fotoktp.uri,
+  //   type: 'image/jpeg',
+  //   name: 'testPhotoName'
+  // });
+  // data.append('suratizin', {
+  //   uri: suratizin.uri,
+  //   type: 'image/jpeg',
+  //   name: 'testPhotoName'
+  // });
+  dispatch({type: VISIT_FORM_IDLE});
 }
