@@ -19,7 +19,7 @@ class FormVisit extends Component {
 						title="Pengajuan Kunjungan"
 						onPress={()=>this.props.navigation.navigate('PrisonerDetail')}/>
 						<View style = {styles.container1}>
-							<Text>{this.props.fullname}</Text>
+							<Text>{this.props.name}</Text>
 	          				<Text>{this.props.email}</Text>
 	          				<Text>{this.props.nik}</Text>
 	          				<Text>{this.props.nohp}</Text>
@@ -78,9 +78,9 @@ VisittForm =  reduxForm({
 })(FormVisit);
 
 const mapStateToProps = ({auth}) => {
-  const { fullname, email, nik, nohp } = {fullname: 'John Doe', email:'johnkdoe@gmail.com', nik : '090909090909', nohp: '08212121212'};
+  const { name, email, nik, nohp } = auth.user;
 
-  return { fullname, email, nik, nohp };
+  return { name, email, nik, nohp };
 };
 
 

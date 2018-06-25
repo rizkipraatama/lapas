@@ -9,3 +9,6 @@ export const DELETE_USER = 'DELETE_USER';
 
 export const FETCH_VISIT = 'FETCH_VISIT';
 export const FETCH_VISIT_SUCCESS = 'FETCH_VISIT_SUCCESS';
+
+export const VISITATION = 'VISITATION';
+export const VISITATION_SUCC = 'VISITATION_SUCC';
