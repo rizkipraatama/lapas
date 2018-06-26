@@ -34,7 +34,8 @@ const fetchVisitSuccess = (dispatch, visits) => {
   dispatch({ type: FETCH_VISIT_SUCCESS, payload: visits });
 }
 
-export const createVisit = ({ktp, suratizin}, dispatch, props) => {
+export const createVisit = ({tipe, ktp, suratizin}, dispatch, props) => {
+  console.log(props.token);
   dispatch({type: VISIT_PRISONER});
   // const data = new FormData();
   // data.append('fotoktp', {
@@ -47,5 +48,7 @@ export const createVisit = ({ktp, suratizin}, dispatch, props) => {
   //   type: 'image/jpeg',
   //   name: 'testPhotoName'
   // });
+  Navigation.replaceWith('Home');
+  dispatch(reset('Visit'));
   dispatch({type: VISIT_FORM_IDLE});
 }

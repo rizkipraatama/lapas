@@ -4,10 +4,6 @@ import * as Theme from "../constant/Theme";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 class Input extends Component {
-  constructor(props){
-    super(props);
-  }
-
   isShowingError(meta){
     return meta.touched && meta.error;
   }

@@ -23,3 +23,7 @@ export const isNotEmpty = (value) => {
   return !value ? 'Field harus diisi' : undefined;
 }
 
+export const isAgreement = (value) => {
+  return !value ? 'Harus disetujui' : undefined;
+}
+

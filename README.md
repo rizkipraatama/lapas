@@ -87,6 +87,73 @@ public class MainActivity extends ReactActivity {
 </resources>
 ```
 
+# Install react-native-image-crop-picker
+1. Install package and link it
+```
+yarn add react-native-image-crop-picker
+react-native link react-native-image-crop-picker
+```
+2. Make sure you are using Gradle >= 2.2.x (android/build.gradle)
+```
+buildscript {
+    ...
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.3'
+        ...
+    }
+    ...
+}
+```
+3. Add this repositories to your build.gradle (android/build.gradle)
+```
+allprojects {
+    repositories {
+      mavenLocal()
+      jcenter()
+      maven { url "$rootDir/../node_modules/react-native/android" }
+
+      // ADD THIS
+      maven { url 'https://maven.google.com' }
+
+      // ADD THIS
+      maven { url "https://jitpack.io" }
+    }
+}
+```
+4. Add this to (android/app/build.gradle)
+```
+android {
+    ...
+
+    defaultConfig {
+        ...
+        vectorDrawables.useSupportLibrary = true
+        ...
+    }
+    ...
+}
+```
+5. Use Android SDK >= 26 (android/app/build/gradle)
+```
+android {
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
+    ...
+    
+    defaultConfig {
+      ...
+      targetSdkVersion 27
+      ...
+    }
+    ...
+}
+```
+6. Add camera permission to app/src/main/AndroidManifest.xml
+```
+<uses-permission android:name="android.permission.CAMERA"/>
+```
+
+
 # Run App
 4. run react-native on android
 ```

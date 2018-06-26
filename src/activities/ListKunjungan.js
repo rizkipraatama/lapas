@@ -7,8 +7,6 @@ import * as Theme from '../constant/Theme';
 import { connect } from 'react-redux';
 import { fetchVisit } from "../actions";
 
-import Navigator from '../services/Navigation';
-
 class ListKunjungan extends Component {
 	constructor(props){
 		super(props);

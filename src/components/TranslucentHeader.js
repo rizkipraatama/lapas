@@ -4,12 +4,12 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import * as Theme from "../constant/Theme";
 
-const TranslucentHeader = ({ title, onPress }) => {
+const TranslucentHeader = ({ title, onPress, icon="close" }) => {
   const {buttonStyle, containerStyle, titleStyle} = styles;
   return (
     <View style={containerStyle}>
       <TouchableOpacity onPress={onPress} style={buttonStyle}>
-        <Icon name="close" size={36} color="#333"/>
+        <Icon name={icon} size={36} color="#333"/>
       </TouchableOpacity>
       <Text style={titleStyle}>{title}</Text>
     </View>
