@@ -1,3 +1,8 @@
+export const visits = [
+  { id: 1, approved: true, prisoner: 'Londo Kampung', 'hari': 'Jum\'at' },
+  { id: 2, approved: false, prisoner: 'Sheldon Cooper', 'hari': 'Sabtu' },
+]
+
 export const penghuni = [
   {
     "gender": "male",
@@ -34,7 +39,8 @@ export const penghuni = [
       "medium": "https://randomuser.me/api/portraits/med/men/29.jpg",
       "thumbnail": "https://randomuser.me/api/portraits/thumb/men/29.jpg"
     },
-    "nat": "CA"
+    "nat": "CA",
+    "tipe": "tahanan",
   },
   {
     "gender": "male",
@@ -71,6 +77,7 @@ export const penghuni = [
       "medium": "https://randomuser.me/api/portraits/med/men/17.jpg",
       "thumbnail": "https://randomuser.me/api/portraits/thumb/men/17.jpg"
     },
-    "nat": "TR"
+    "nat": "TR",
+    "tipe": "narapidana",
   }
 ];

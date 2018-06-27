@@ -28,8 +28,8 @@ class FormVisit2 extends Component {
 						onPress={()=>this.props.navigation.goBack()}
             icon="arrow-left"/>
           <ScrollView style={styles.rulesContainer}>
-            <Text style={{fontSize: Theme.H4}}>Peraturan Kunjungan</Text>
-            <Text style={{fontSize: Theme.BODY1}}>
+            <Text style={{fontSize: Theme.H5}}>Peraturan Kunjungan</Text>
+            <Text style={{fontSize: Theme.BODY2}}>
               {Strings.VISIT_RULE}
             </Text>
           </ScrollView>

@@ -8,10 +8,10 @@ import { reduxForm, Field } from 'redux-form';
 import { isNotEmpty } from '../validator';
 
 
-class FormVisit extends Component {
+class FormVisit1 extends Component {
 	constructor(props){
 		super(props);
-		this.props.initialize({ tipe: 'tahanan', setuju: false });
+		this.props.initialize({ setuju: false });
 
 	}
 
@@ -27,16 +27,11 @@ class FormVisit extends Component {
 						title="Pengajuan Kunjungan (1/2)"
 						onPress={()=>this.props.navigation.navigate('PrisonerDetail')}/>
 					<View>
-						<Text>{this.props.name}</Text>
-						<Text>{this.props.email}</Text>
-						<Text>{this.props.nik}</Text>
-						<Text>{this.props.nohp}</Text>
+						<Text>{this.props.user.name}</Text>
+						<Text>{this.props.user.email}</Text>
+						<Text>{this.props.user.nik}</Text>
+						<Text>{this.props.user.nohp}</Text>
 					</View>
-					<Field
-						name='tipe'
-						component={ButtonGroup}
-						buttons={[{title: 'Tahanan', value: 'tahanan'}, {title: 'Narapidana', value: 'narapidana'}]}
-					/>
 					<Field
 						name='ktp'
 						component={ImageInput}
@@ -50,7 +45,7 @@ class FormVisit extends Component {
 						icon="file-document"
 						placeholder="Foto Surat Izin"
 						returnKeyType="go"
-						display={this.props.tipe == "narapidana" ? 'flex' : 'none'}
+						display={this.props.currPrisoner.tipe == "narapidana" ? 'flex' : 'none'}
 					/> 
 					<Button 
 						onPress={() => {this.props.navigation.navigate({routeName: 'FormVisit2'})}}
@@ -90,13 +85,12 @@ reduxFormVisit =  reduxForm({
 		}
 		return errors;
 	},
-})(FormVisit);
+})(FormVisit1);
 
-const mapStateToProps = ({auth, form}) => {
-	const { values } = form.Visit;
-	const tipe = values? values.tipe : '';
-  const { name, email, nik, nohp } = auth.user;
-  return { tipe, name, email, nik, nohp };
+const mapStateToProps = ({auth, prisoner}, props) => {
+	const { user } = auth;
+	const currPrisoner = prisoner.prisoners[props.navigation.state.params.index];
+  return { user, currPrisoner };
 };
 
 export default connect(mapStateToProps, null)(reduxFormVisit);

@@ -19,6 +19,7 @@ class CheckBox extends Component {
     const { input, title } = this.props;
     return (
       <ElementsCheckBox 
+        containerStyle={{marginBottom: 8, backgroundColor: '#fff0'}}
         title={title}
         checked={input.value}
         onPress={() => {this.handlePress()}}

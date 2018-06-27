@@ -1,10 +1,17 @@
-import { Splash, Login, Register, ListKunjungan, PrisonerDetail, Profile, Settings, FormVisit, FormVisit2 } from "./activities";
+import { 
+  Splash, Login, Register, PrisonerList, 
+  PrisonerDetail, Profile, Settings, 
+  FormVisit1, FormVisit2, VisitList 
+} from "./activities";
 import { createStackNavigator, createDrawerNavigator  } from 'react-navigation';
 import { HomeDrawer } from "./components";
 
 Home = createDrawerNavigator({
+  'Penghunni Lapas': {
+    screen: PrisonerList,
+  },
   'List Kunjungan': {
-    screen: ListKunjungan,
+    screen: VisitList,
   },
   'Profile' : {
     screen:  Profile,
@@ -22,7 +29,7 @@ Home = createDrawerNavigator({
 // };
 
 rootNav = createStackNavigator({
-  Splash, Login, Register, Home, PrisonerDetail, Settings, FormVisit, FormVisit2,
+  Splash, Login, Register, Home, PrisonerDetail, Settings, FormVisit1, FormVisit2,
 }, {
   initialRouteName: 'Splash',
   headerMode: 'none',

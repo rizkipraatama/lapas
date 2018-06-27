@@ -5,8 +5,7 @@ import { Tile, List, ListItem } from 'react-native-elements';
 
 class PrisonerDetail extends Component {
   render() {
-    console.log(this.props.navigation.state.params);
-    const { picture, name, email, phone, login, dob, location } = this.props.navigation.state.params;
+    const { index, tipe, picture, name, email, phone, login, dob, location } = this.props.navigation.state.params;
     return (
       <View style={{flex: 1}}>
         <Header 
@@ -17,7 +16,7 @@ class PrisonerDetail extends Component {
             imageSrc={{ uri: picture.large}}
             featured
             title={`${name.first.toUpperCase()} ${name.last.toUpperCase()}`}
-            caption={email}
+            caption={`${tipe}`}
           />
 
           <List>
@@ -55,7 +54,7 @@ class PrisonerDetail extends Component {
           </List>
           <Button
           title="Ajukan Kunjungan"
-            onPress={()=>this.props.navigation.navigate('FormVisit')}></Button>        
+            onPress={()=>this.props.navigation.navigate('FormVisit1', { index })}></Button>        
           </ScrollView>
       </View>
       

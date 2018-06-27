@@ -9,7 +9,7 @@ const TranslucentHeader = ({ title, onPress, icon="close" }) => {
   return (
     <View style={containerStyle}>
       <TouchableOpacity onPress={onPress} style={buttonStyle}>
-        <Icon name={icon} size={36} color="#333"/>
+        <Icon name={icon} size={28} color="#333"/>
       </TouchableOpacity>
       <Text style={titleStyle}>{title}</Text>
     </View>
@@ -27,7 +27,7 @@ const styles = {
     marginRight: 16
   },
   titleStyle: {
-    fontSize: Theme.TITLE_SIZE,
+    fontSize: Theme.H6,
   }
 };
 

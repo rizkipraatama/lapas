@@ -11,7 +11,7 @@ YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTIm
 
 export default class App extends React.Component {
   render() {
-    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+    const composeEnhancers = (__DEV__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
     const store = createStore(reducers, {}, composeEnhancers(applyMiddleware(ReduxThunk)));
 
     return (

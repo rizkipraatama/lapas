@@ -5,32 +5,30 @@ import { List, ListItem } from 'react-native-elements';
 import * as Theme from '../constant/Theme';
 
 import { connect } from 'react-redux';
-import { fetchVisit } from "../actions";
+import { fetchVisits } from "../actions";
 
-class ListKunjungan extends Component {
+class VisitList extends Component {
 	constructor(props){
 		super(props);
-		this.props.fetchVisit({ token: this.props.token });
-		this.renderVisit.bind(this);
+		this.props.fetchVisits({ token: this.props.token });
+		this.renderVisits.bind(this);
 	}
 
-	renderVisit(){
+	renderVisits(){
 		if (!this.props.visits) return null;
 
-		visitsListItem = this.props.visits.map((user) => (
+		visitListItem = this.props.visits.map((visit) => (
 			<ListItem
-				key={user.login.username}
-				roundAvatar
-				avatar={{ uri: user.picture.thumbnail }}
-				title={`${user.name.first.toUpperCase()} ${user.name.last.toUpperCase()}`}
-				subtitle={user.email}
-				onPress={() => { this.props.navigation.navigate('PrisonerDetail', { ...user }) }}
+        hideChevron
+				key={visit.id}
+				title={`Prisoner: ${visit.prisoner}`}
+				subtitle={`${visit.hari} - ${visit.approved ? 'disetujui' : 'ditolak'}`}
 			/>
 		));
 
 		return (
 			<List>
-				{visitsListItem}
+				{visitListItem}
 			</List>
 		)
 	}
@@ -45,9 +43,9 @@ class ListKunjungan extends Component {
 			<View style={{flex: 1}}>
 				<Header 
 					left={{icon: 'menu', onPress: () => this.props.navigation.openDrawer()}} 
-					title="Kunjungan Lapas"/>
+					title="List Kunjungan"/>
 				<ScrollView>
-						{this.renderVisit()}
+						{this.renderVisits()}
 				</ScrollView>
 			</View>
 		);
@@ -60,4 +58,4 @@ const mapStateToProps = ({ auth, visit }) => {
 	return { token, visits, loading };
 }
 
-export default connect(mapStateToProps, { fetchVisit })(ListKunjungan);
+export default connect(mapStateToProps, { fetchVisits })(VisitList);

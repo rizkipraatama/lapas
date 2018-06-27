@@ -5,9 +5,11 @@ import RegisterFormReducer from './RegisterFormReducer';
 import VisitReducer from './VisitReducer';
 import { reducer as FormReducer } from 'redux-form';
 import VisitFormReducer from './VisitFormReducer';
+import PrisonerReducer from './PrisonerReducer';
 
 export default combineReducers({
   auth: AuthReducer,
+  prisoner: PrisonerReducer,
   visit: VisitReducer,
   form: FormReducer.plugin({
     Login: LoginFormReducer,
