@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity} from 'react-native';
 import * as Theme from "../constant/Theme";
 
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 class ButtonGroup extends Component {
 
   constructor(props){
@@ -31,8 +33,10 @@ class ButtonGroup extends Component {
   }
 
   render(){
+    const { icon } = this.props;
     return (
       <View style={styles.containerStyle}>
+        <Icon name={icon} size={24} color="#333" style={styles.iconStyle}/>
         { this.renderButton() }
       </View>
     );
@@ -55,6 +59,11 @@ const styles = {
   buttonTextStyle: {
     textAlign: 'center',
     color: '#fff'
+  },
+  iconStyle: {
+    alignSelf: 'center',
+    paddingLeft: 16,
+    paddingRight: 10,
   }
 };
 

@@ -8,3 +8,4 @@ export * from './HomeDrawer';
 export * from './ImageInput';
 export * from './ButtonGroup';
 export * from './CheckBox';
+export * from './Picker';

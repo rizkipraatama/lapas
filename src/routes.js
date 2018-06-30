@@ -1,6 +1,6 @@
 import { 
   Splash, Login, Register, PrisonerList, 
-  PrisonerDetail, Profile, Settings, 
+  PrisonerDetail, Profile, UpdateProfile, UpdatePassword, 
   FormVisit1, FormVisit2, VisitList 
 } from "./activities";
 import { createStackNavigator, createDrawerNavigator  } from 'react-navigation';
@@ -29,7 +29,7 @@ Home = createDrawerNavigator({
 // };
 
 rootNav = createStackNavigator({
-  Splash, Login, Register, Home, PrisonerDetail, Settings, FormVisit1, FormVisit2,
+  Splash, Login, Register, Home, PrisonerDetail, UpdateProfile, UpdatePassword, FormVisit1, FormVisit2,
 }, {
   initialRouteName: 'Splash',
   headerMode: 'none',

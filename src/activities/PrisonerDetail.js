@@ -5,53 +5,58 @@ import { Tile, List, ListItem } from 'react-native-elements';
 
 class PrisonerDetail extends Component {
   render() {
-    const { index, tipe, picture, name, email, phone, login, dob, location } = this.props.navigation.state.params;
+    const { index, prisoner } = this.props.navigation.state.params;
     return (
       <View style={{flex: 1}}>
         <Header 
 					left={{icon: 'arrow-left', onPress: () => this.props.navigation.goBack()}} 
-					title={name.first.toUpperCase()}/>
+					title={prisoner.nama.toUpperCase()}/>
         <ScrollView>
           <Tile
-            imageSrc={{ uri: picture.large}}
             featured
-            title={`${name.first.toUpperCase()} ${name.last.toUpperCase()}`}
-            caption={`${tipe}`}
+            title={`${prisoner.nama}`}
+            caption={`${prisoner.pasal} - ${prisoner.status[0].toUpperCase() + prisoner.status.slice(1)}`}
           />
 
           <List>
             <ListItem
-              title="Email"
-              rightTitle={email}
+              title="ID"
+              rightTitle={prisoner.id}
               hideChevron
             />
             <ListItem
-              title="Phone"
-              rightTitle={phone}
+              title="No Instansi"
+              rightTitle={prisoner.no_instansi}
+              hideChevron
+            />
+            <ListItem
+              title="Alias"
+              rightTitle={prisoner.alias}
               hideChevron
             />
           </List>
 
           <List>
             <ListItem
-              title="Username"
-              rightTitle={login.username}
+              title="Hukuman"
+              rightTitle={prisoner.hukuman}
+              hideChevron
+            />
+          </List>
+          
+          <List>
+            <ListItem
+              title="Tanggal Masuk"
+              rightTitle={prisoner.tanggal_masuk}
+              hideChevron
+            />
+            <ListItem
+              title="Tanggal Keluar"
+              rightTitle={prisoner.tanggal_keluar}
               hideChevron
             />
           </List>
 
-          <List>
-            <ListItem
-              title="Birthday"
-              rightTitle={dob}
-              hideChevron
-            />
-            <ListItem
-              title="City"
-              rightTitle={location.city}
-              hideChevron
-            />
-          </List>
           <Button
           title="Ajukan Kunjungan"
             onPress={()=>this.props.navigation.navigate('FormVisit1', { index })}></Button>        

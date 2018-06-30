@@ -10,7 +10,7 @@ import { fetchVisits } from "../actions";
 class VisitList extends Component {
 	constructor(props){
 		super(props);
-		this.props.fetchVisits({ token: this.props.token });
+		this.props.fetchVisits(this.props.visitorID);
 		this.renderVisits.bind(this);
 	}
 
@@ -21,8 +21,8 @@ class VisitList extends Component {
 			<ListItem
         hideChevron
 				key={visit.id}
-				title={`Prisoner: ${visit.prisoner}`}
-				subtitle={`${visit.hari} - ${visit.approved ? 'disetujui' : 'ditolak'}`}
+				title={`Prisoner: ${visit.nama}`}
+				subtitle={`${visit.hari} - ${visit.visit_status}`}
 			/>
 		));
 
@@ -53,9 +53,9 @@ class VisitList extends Component {
 }
 
 const mapStateToProps = ({ auth, visit }) => {
-	const { token } = auth;
+	const visitorID = auth.user.username;
 	const { visits, loading } = visit;
-	return { token, visits, loading };
+	return { visitorID, visits, loading };
 }
 
 export default connect(mapStateToProps, { fetchVisits })(VisitList);

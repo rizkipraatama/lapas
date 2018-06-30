@@ -9,7 +9,11 @@ class Input extends Component {
   }
 
   render(){
-    const { input, meta, icon, editable = true, onSubmitEditing, placeholder, secureTextEntry, returnKeyType, getRef} = this.props;
+    const { 
+      input, meta, icon, editable = true, multiline = false,
+      onSubmitEditing, placeholder, secureTextEntry, 
+      returnKeyType, getRef
+    } = this.props;
     const showingError = this.isShowingError(meta);
     bC = showingError ? Theme.ERROR_COLOR : '';
     bW = showingError ? 1 : 0;
@@ -25,6 +29,7 @@ class Input extends Component {
           placeholder={placeholder}
           autoCorrect={false}
           style={inputStyle}
+          multiline = {multiline}
           onSubmitEditing={onSubmitEditing}
           returnKeyType={returnKeyType}
           ref={(r)=>{ if (typeof getRef == 'function') getRef(r)}}

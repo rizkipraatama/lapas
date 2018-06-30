@@ -77,11 +77,11 @@ reduxFormVisit2 =  reduxForm({
 	},
 })(FormVisit2);
 
-const mapStateToProps = ({auth, form}) => {
-	const { loading } = form.Visit;
-  //const { name, email, nik, nohp } = auth.user;
-	const token = auth.token;
-  return { loading, token };
+const mapStateToProps = ({auth, prisoner, form}, props) => {
+  const { loading } = form.Visit;
+  const prisonerID = prisoner.prisoners[props.navigation.state.params.index].id;
+  const visitorID = auth.user.username;
+  return { loading, visitorID, prisonerID };
 };
 
 export default connect(mapStateToProps, null)(reduxFormVisit2);

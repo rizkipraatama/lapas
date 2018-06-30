@@ -19,12 +19,10 @@ class PrisonerList extends Component {
 
 		prisonerListItem = this.props.prisoners.map((prisoner, index) => (
 			<ListItem
-				key={prisoner.login.username}
-				roundAvatar
-				avatar={{ uri: prisoner.picture.thumbnail }}
-				title={`${prisoner.name.first.toUpperCase()} ${prisoner.name.last.toUpperCase()}`}
-				subtitle={prisoner.tipe}
-				onPress={() => { this.props.navigation.navigate('PrisonerDetail', { ...prisoner, index }) }}
+				key={prisoner.id}
+				title={`${prisoner.nama} - ID: ${prisoner.id} - Instansi: ${prisoner.no_instansi}`}
+				subtitle={`${prisoner.pasal} - ${prisoner.status[0].toUpperCase() + prisoner.status.slice(1)}`}
+				onPress={() => { this.props.navigation.navigate('PrisonerDetail', { prisoner, index }) }}
 			/>
 		));
 

@@ -3,28 +3,26 @@ import {
   FETCH_PRISONERS_SUCCESS,
 } from '../constant/Actions';
 
-import { penghuni  as prisoners } from '../datamock'
+import { formRequest } from "../services/Networking";
 
 export const fetchPrisoners = ({token}) => {
   return (dispatch) => {
     dispatch({ type: FETCH_PRISONERS });
-    fetch('http://35.198.204.194:8000/categories/', {
-      method: 'GET',
-      headers: {
-          Accept: 'application/json',
-          'Content-type': 'application/json',
-      },
-    })
-    .then((response) => response.json())
-    .then((res) => {
-        if (res) {
-          // TODO: Change mock to real data
-          fetchPrisonersSuccess(dispatch, prisoners);
+    formRequest('/api/tahanan', 'GET')
+      .then((r) => {
+        if (!r.error) {
+          fetchPrisonersSuccess(dispatch, r.data);
+        } else {
+          fetchPrisonersFailed(dispatch, r.error_message);
         }
-    });
+      });
   }
 }
 
 const fetchPrisonersSuccess = (dispatch, prisoners) => {
   dispatch({ type: FETCH_PRISONERS_SUCCESS, payload: prisoners });
+}
+
+const fetchPrisonersFailed = (dispatch, error) => {
+  dispatch({ type: FETCH_PRISONERS_FAILED, payload: error});
 }

@@ -4,6 +4,9 @@ import { Header } from '../components'
 import { Tile, List, ListItem, Button } from 'react-native-elements';
 
 import { connect } from 'react-redux';
+import { logout } from '../actions';
+
+import * as Theme from '../constant/Theme';
 
 class Profile extends Component {
 
@@ -14,51 +17,66 @@ class Profile extends Component {
 					left={{icon: 'menu', onPress: () => this.props.navigation.openDrawer()}} 
 					title='Profile'/>
         <ScrollView>
-          <Tile
-            featured
-            title={this.props.name}
-            caption={this.props.nik}
-          />
-
-          <Button
-            title="Settings"
-            buttonStyle={{ marginTop: 20 }}
-            onPress={() => { this.props.navigation.navigate('Settings') }}
-          />
 
           <List>
             <ListItem
-              title="Email"
-              rightTitle={this.props.email}
+              title="Username"
+              rightTitle={this.props.user.username}
+              hideChevron
+            />         
+          </List>
+
+          <List>
+            <ListItem
+              title="Nama Lengkap"
+              rightTitle={this.props.user.nama}
+              hideChevron
+            />    
+            <ListItem
+              title="NIK"
+              rightTitle={this.props.user.nik}
+              hideChevron
+            />
+          </List>
+
+          <List>
+            <ListItem
+              title="Jenis Kelamin"
+              rightTitle={this.props.user.jenis_kelamin}
+              hideChevron
+            />
+            <ListItem
+              title="Lokasi"
+              rightTitle={this.props.user.alamat}
               hideChevron
             />
             <ListItem
               title="Phone"
-              rightTitle={this.props.nohp}
+              rightTitle={this.props.user.telepon}
               hideChevron
             />
           </List>
 
-          <List>
-            <ListItem
-              title="Email"
-              rightTitle={this.props.email}
-              hideChevron
-            />
-            <ListItem
-              title="NIK"
-              rightTitle={this.props.nik}
-              hideChevron
-            />
-          </List>
+          <Button
+            title="Perbaharui Profile"
+            buttonStyle={{ marginTop: 20 }}
+            backgroundColor={Theme.COLORED_BACKGROUND}
+            onPress={() => { this.props.navigation.navigate('UpdateProfile') }}
+          />
 
-          <List>
-            <ListItem
-              title="Lokasi"
-              rightTitle={this.props.alamat}
-              hideChevron
-            />
-          </List>
+          <Button
+            title="Ubah Password"
+            buttonStyle={{ marginTop: 20 }}
+            backgroundColor={Theme.COLORED_BACKGROUND}
+            onPress={() => { this.props.navigation.navigate('UpdatePassword') }}
+          />
+
+          <Button
+            title="Keluar"
+            buttonStyle={{ marginTop: 20 }}
+            backgroundColor={Theme.ERROR_COLOR}
+            onPress={() => { this.props.logout(); }}
+          />
         </ScrollView>
       </View>
     );
@@ -66,8 +84,7 @@ class Profile extends Component {
 }
 
 const mapStateToProps = ({ auth }) => {
-	const { username, name, email, nik, nohp, alamat } = auth.user;
-	return { username, name, email, nik, nohp, alamat };
+	return { user: auth.user };
 }
 
-export default connect(mapStateToProps, {})(Profile);
+export default connect(mapStateToProps, { logout })(Profile);

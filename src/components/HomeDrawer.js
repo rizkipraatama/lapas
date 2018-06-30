@@ -13,9 +13,9 @@ class HomeDrawer extends Component {
     return (
       <View>
         <View style={styles.container}>
-          <Text style={styles.fullname}>{this.props.name}</Text>
-          <Text style={styles.email}>{this.props.email}</Text>
-          <Text style={styles.email}>{this.props.nohp}</Text>
+          <Text style={styles.fullname}>{this.props.nama}</Text>
+          <Text style={styles.nik}>{`NIK: ${this.props.nik}`}</Text>
+          <Text style={styles.nohp}>{this.props.telepon}</Text>
         </View>
         <DrawerItems {...this.props}/>
       </View>
@@ -37,16 +37,20 @@ const styles = {
     fontSize: Theme.H6,
     color: '#fff'
   },
-  email: {
-    fontSize: Theme.SUBTITLE1,
+  nik: {
+    fontSize: Theme.SUBTITLE2,
+    color: '#fff'
+  },
+  nohp: {
+    fontSize: Theme.CAPTION,
     color: '#fff'
   }
 }
 
 const mapStateToProps = ({auth}) => {
-  const { name, email, nohp } = auth.user;
+  const { nama, nik, telepon } = auth.user;
 
-  return { name, email, nohp };
+  return { nama, nik, telepon };
 };
 
 HomeDrawer =  connect(mapStateToProps, null)(HomeDrawer);

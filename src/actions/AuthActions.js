@@ -10,6 +10,8 @@ import { Alert, AsyncStorage } from "react-native";
 import Navigation from '../services/Navigation';
 import { change, reset, SubmissionError } from "redux-form";
 
+import { formRequest } from "../services/Networking";
+
 export const gettingAuth = () => {
   return async (dispatch) => {
     try {
@@ -21,33 +23,27 @@ export const gettingAuth = () => {
         Navigation.replaceWith('Login');
       }
     } catch (error) {
-      console.log(error);
-      Alert.alert("Penyimpanan AsyncStorage gagal!", "Kesalahan aplikasi atau hak akses storage dinonaktifkan");
+      console.tron.error(error);
+      //Alert.alert("Penyimpanan AsyncStorage gagal!", "Kesalahan aplikasi atau hak akses storage dinonaktifkan");
     }
   }
 }
 
 export const loginUser = ({username, password}, dispatch, props) => {
   dispatch({type: LOGIN_USER});
-  return fetch('http://pratamaserv.com/userLogin.php', {
-    method: 'POST',
-    headers: {
-        Accept: 'application/json',
-        'Content-type': 'application/json',
-    },
-    body: JSON.stringify({username, password}),
-  })
-  .then((response) => response.json())
-  .then((r) => {
+  return formRequest('/Login/secret_login_url', 'POST', {username, password})
+    .then((r) => {
       dispatch({type: LOGIN_FORM_IDLE });
       if (r.error == false) {
-        // TODO: Change user mock to real data
-        token = "2323";
-        loginUserSuccess(dispatch, token, r.user);
+        const profile = JSON.parse(r.profile);        
+        loginUserSuccess(dispatch, profile['access_token'], profile);
       } else {
         loginUserFail(dispatch, r.msg);
       }
-  });
+    }).catch((e)=>{
+      dispatch({type: LOGIN_FORM_IDLE });
+      console.log(e);
+    });
 }
 
 const loginUserFail = (dispatch, message) => {
@@ -71,33 +67,22 @@ const setUserNavigateHome = (dispatch, token, user) => {
   Navigation.replaceWith('Home');
 }
 
-export const createUser = ({fullname, username, email, password, address, nik, nohp}, dispatch, props) => {
+export const createUser = ({fullname, username, gender, password, address, nik, nohp}, dispatch, props) => {
   dispatch({type: CREATE_USER});
-  return fetch('http://pratamaserv.com/insert_new_user.php', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      name: fullname,
-      username,
-      email,
-      password,
-      alamat: address,
-      nik,
-      nohp
-    })
-  })
-  .then((response) => { 
-    dispatch({type: REGISTER_FORM_IDLE });
-    return response.json()
-  })
-  .then((responseJson) => {
-    createUserSuccess(dispatch, responseJson);
-  }).catch((error) => {
-    createUserFailed(dispatch, error);
-  });
+  return formRequest('/api/register', 'POST', {
+    nama: fullname, username, password, alamat: address,
+    nik, telepon: nohp, jenis_kelamin: gender
+  }).then((r) => {
+      dispatch({type: REGISTER_FORM_IDLE });
+      if (!r.error) {
+        createUserSuccess(dispatch);
+      } else {
+        createUserFailed(dispatch, r.error_message);
+      }
+    }).catch((error) => {
+      dispatch({type: REGISTER_FORM_IDLE });
+      console.tron.error(error);
+    });
 }
 
 const createUserFailed = (dispatch, message) => {
@@ -105,6 +90,7 @@ const createUserFailed = (dispatch, message) => {
 }
 
 const createUserSuccess = (dispatch) => {
+  dispatch(reset('Register'));
   Alert.alert(
     'Pendaftaran Berhasil', 
     'Silahkan login!',

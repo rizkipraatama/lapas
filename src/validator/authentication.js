@@ -23,6 +23,12 @@ export const isNotEmpty = (value) => {
   return !value ? 'Field harus diisi' : undefined;
 }
 
+export const isNIK = (value) => {
+  return !value 
+    ? 'NIK harus diisi' : value.length < 16 
+    ? 'NIK tidak valid' : undefined;
+}
+
 export const isAgreement = (value) => {
   return !value ? 'Harus disetujui' : undefined;
 }
