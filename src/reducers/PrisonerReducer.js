@@ -6,6 +6,7 @@ import {
 
 const INITIAL_STATE = {
   loading: false,
+  prisoners: [],
 };
 
 export default (state = INITIAL_STATE, action) => {

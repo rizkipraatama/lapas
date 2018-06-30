@@ -55,28 +55,28 @@ class FormVisit1 extends Component {
 					<View>
 						<Text style={{fontSize: Theme.H6}}>Info Pengunjung</Text>
 						<Label text="Nama Pengunjung"/>
-					        <Field
+					<Field
 						name="nama pengunjung"
 						component={Input}
-						placeholder={this.props.user.name}
+						placeholder={this.props.user.nama}
 						editable = {false}
 					/>
 					<Label text="NIK"/>
-					        <Field
+					<Field
 						name="nik"
 						component={Input}
 						placeholder={this.props.user.nik}
 						editable = {false}
 					/>
 					<Label text="No Telepon"/>
-					         <Field
+					<Field
 						name="telepon"
 						component={Input}
-						placeholder={this.props.user.nohp}
+						placeholder={this.props.user.telepon}
 						editable = {false}
 					/>
 					<Label text="Alamat"/>
-					        <Field
+					<Field
 						name="alamat"
 						component={Input}
 						placeholder={this.props.user.alamat}

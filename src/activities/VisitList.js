@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { StatusBar, View, ScrollView } from 'react-native';
-import { Header } from "../components/";
+import { Header, ActivityFiller } from "../components/";
 import { List, ListItem } from 'react-native-elements';
 import * as Theme from '../constant/Theme';
 
@@ -25,12 +25,20 @@ class VisitList extends Component {
 				subtitle={`${visit.hari} - ${visit.visit_status}`}
 			/>
 		));
-
-		return (
-			<List>
-				{visitListItem}
-			</List>
-		)
+		
+		if (this.props.visits.length == 0) {
+			return (
+				<ActivityFiller icon = "null" title = "Belum ada rencana kunjungan" loading={this.props.loading}/>
+			);
+		} else {
+			return (
+				<ScrollView>
+					<List>
+						{visitListItem}
+					</List>
+				</ScrollView>
+			)
+		}
 	}
 
 	static navigationOptions = (props) => {
@@ -44,9 +52,7 @@ class VisitList extends Component {
 				<Header 
 					left={{icon: 'menu', onPress: () => this.props.navigation.openDrawer()}} 
 					title="List Kunjungan"/>
-				<ScrollView>
-						{this.renderVisits()}
-				</ScrollView>
+					{this.renderVisits()}
 			</View>
 		);
 	}

@@ -38,11 +38,11 @@ export const loginUser = ({username, password}, dispatch, props) => {
         const profile = JSON.parse(r.profile);        
         loginUserSuccess(dispatch, profile['access_token'], profile);
       } else {
-        loginUserFail(dispatch, r.msg);
+        loginUserFail(dispatch, r.error_message);
       }
     }).catch((e)=>{
       dispatch({type: LOGIN_FORM_IDLE });
-      console.log(e);
+      console.tron.log(e);
     });
 }
 

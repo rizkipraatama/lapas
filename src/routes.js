@@ -7,7 +7,7 @@ import { createStackNavigator, createDrawerNavigator  } from 'react-navigation';
 import { HomeDrawer } from "./components";
 
 Home = createDrawerNavigator({
-  'Penghunni Lapas': {
+  'Penghuni Lapas': {
     screen: PrisonerList,
   },
   'List Kunjungan': {
