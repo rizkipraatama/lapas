@@ -20,8 +20,8 @@ class PrisonerList extends Component {
 		prisonerListItem = this.props.prisoners.map((prisoner, index) => (
 			<ListItem
 				key={prisoner.id}
-				title={`${prisoner.nama} - ID: ${prisoner.id} - Instansi: ${prisoner.no_instansi}`}
-				subtitle={`${prisoner.pasal} - ${prisoner.status[0].toUpperCase() + prisoner.status.slice(1)}`}
+				title={`${prisoner.nama} - Instansi: ${prisoner.no_instansi}`}
+				subtitle={`Alias: ${prisoner.alias} - Status : ${prisoner.status[0].toUpperCase() + prisoner.status.slice(1)}`}
 				onPress={() => { this.props.navigation.navigate('PrisonerDetail', { prisoner, index }) }}
 			/>
 		));

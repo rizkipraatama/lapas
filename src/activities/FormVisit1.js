@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { ScrollView, KeyboardAvoidingView, StatusBar, Text, View } from 'react-native';
-import { Button, ImageInput, TranslucentHeader, Picker } from "../components";
+import { ScrollView, KeyboardAvoidingView, StatusBar, Text, View, TextInput } from 'react-native';
+import { Button, ImageInput, TranslucentHeader, Picker, Input, Label } from "../components";
 import * as Theme from "../constant/Theme";
 
 import { connect } from 'react-redux';
 import { fetchSchedules } from '../actions';
 import { reduxForm, Field } from 'redux-form';
 import { isNotEmpty } from '../validator';
-
+import { Tile, List, ListItem } from 'react-native-elements';
 class FormVisit1 extends Component {
 	constructor(props){
 		super(props);
@@ -29,15 +29,59 @@ class FormVisit1 extends Component {
 						title="Pengajuan Kunjungan (1/2)"
 						onPress={()=>this.props.navigation.navigate('PrisonerDetail')}/>
 					<View>
-						<Text style={{fontSize: Theme.H6}}>Kunjungan</Text>
-						<Text>{this.props.currPrisoner.id}</Text>
-						<Text>{this.props.currPrisoner.nama}</Text>
-						<Text>{this.props.currPrisoner.no_instansi}</Text>
+						<Text style={{fontSize: Theme.H6}}  >Kunjungan</Text>
+						<Label text="Nama"/>
+						<Field
+						name="name"
+						component={Input}
+						placeholder={this.props.currPrisoner.nama}
+						editable = {false}
+					/>
+					<Label text="Alias"/>
+						<Field
+						name="alias"
+						component={Input}
+						placeholder={this.props.currPrisoner.alias}
+						editable = {false}
+					/>
+					<Label text="No Instansi"/>
+					        <Field
+						name="no_instansi"
+						component={Input}
+						placeholder={this.props.currPrisoner.no_instansi}
+						editable = {false}
+					/>
 					</View>
 					<View>
 						<Text style={{fontSize: Theme.H6}}>Info Pengunjung</Text>
-						<Text>{this.props.user.nama}</Text>
-						<Text>{this.props.user.nik}</Text>
+						<Label text="Nama Pengunjung"/>
+					        <Field
+						name="nama pengunjung"
+						component={Input}
+						placeholder={this.props.user.name}
+						editable = {false}
+					/>
+					<Label text="NIK"/>
+					        <Field
+						name="nik"
+						component={Input}
+						placeholder={this.props.user.nik}
+						editable = {false}
+					/>
+					<Label text="No Telepon"/>
+					         <Field
+						name="telepon"
+						component={Input}
+						placeholder={this.props.user.nohp}
+						editable = {false}
+					/>
+					<Label text="Alamat"/>
+					        <Field
+						name="alamat"
+						component={Input}
+						placeholder={this.props.user.alamat}
+						editable = {false}
+					/>
 					</View>
 					<Field
 						name='hari'

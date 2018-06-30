@@ -13,9 +13,9 @@ class HomeDrawer extends Component {
     return (
       <View>
         <View style={styles.container}>
-          <Text style={styles.fullname}>{this.props.nama}</Text>
+          <Text style={styles.fullname}>{this.props.username}</Text>
           <Text style={styles.nik}>{`NIK: ${this.props.nik}`}</Text>
-          <Text style={styles.nohp}>{this.props.telepon}</Text>
+          <Text style={styles.nohp}>{`No HP: ${this.props.telepon}`}</Text>
         </View>
         <DrawerItems {...this.props}/>
       </View>
@@ -48,9 +48,9 @@ const styles = {
 }
 
 const mapStateToProps = ({auth}) => {
-  const { nama, nik, telepon } = auth.user;
+  const { username, nik, telepon } = auth.user;
 
-  return { nama, nik, telepon };
+  return { username, nik, telepon };
 };
 
 HomeDrawer =  connect(mapStateToProps, null)(HomeDrawer);
